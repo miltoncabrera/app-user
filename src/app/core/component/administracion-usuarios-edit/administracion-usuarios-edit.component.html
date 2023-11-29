@@ -1,0 +1,88 @@
+<mat-dialog-content class="mat-typography">
+  <h3>Registrar usuario</h3>
+
+  <mat-divider></mat-divider>
+  <br>
+  <div class="container-fluid">
+    <form [formGroup]="formularioUsers">
+      <div class="row align-items-center g-3">
+
+        <div class="col-sm">
+          <mat-form-field appearance="outline">
+            <mat-label>Seleccionar un Departamento</mat-label>
+            <mat-select required formControlName="fbIdDepartamento">
+              <mat-option>-- Seleccionar -- </mat-option>
+              <mat-option *ngFor="let department of departamentoRequest" [value]="department.id">
+                {{ department.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm">
+          <mat-form-field appearance="outline">
+            <mat-label>Seleccione un Cargo</mat-label>
+            <mat-select formControlName="fbIdCargo" required>
+              <mat-option>-- Seleccionar -- </mat-option>
+              <mat-option *ngFor="let cargo of cargoRequest" [value]="cargo.id">
+                {{ cargo.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row align-items-center g-3">
+        <div class="col-sm">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Usuario:</mat-label>
+            <input type="text" matInput formControlName="fbUsuario">
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email:</mat-label>
+            <input type="email" matInput formControlName="fbEmail">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row align-items-center g-3">
+        <div class="col-sm">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Primer Nombre:</mat-label>
+            <input type="text" matInput formControlName="fbPrimerNombre">
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Segundo Nombre:</mat-label>
+            <input type="text" matInput formControlName="fbSegundNombre">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row align-items-center g-3">
+        <div class="col-sm">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Primer Apellido:</mat-label>
+            <input type="text" matInput formControlName="fbPrimerApellido">
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Segundo Apellido:</mat-label>
+            <input type="text" matInput formControlName="fbSegundoApellido">
+          </mat-form-field>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="processInsertUsers();">{{data ? 'Actualizar' : 'Registrar'}}</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

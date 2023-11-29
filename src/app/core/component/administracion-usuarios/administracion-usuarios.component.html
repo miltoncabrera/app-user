@@ -1,0 +1,97 @@
+<div class="container-fluid py-3 bg-secondary-subtle text-emphasis-secondary">
+  <p>Módulo de Administración</p>
+  <p>Administracion de usuario</p>
+
+  <div class="row">
+    <div class="col-sm">
+      <mat-form-field style="width: 280px;">
+        <mat-label>Seleccionar un Departamento</mat-label>
+        <mat-select [formControl]="departamentosControl" required>
+          <mat-option>-- Seleccionar -- </mat-option>
+          <mat-option *ngFor="let department of departamentoRequest" value="{{ department.id }}">
+            {{ department.nombre }}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm">
+      <mat-form-field style="width: 280px;">
+        <mat-label>Seleccione un Cargo</mat-label>
+        <mat-select [formControl]="cargosControl" required>
+          <mat-option>-- Seleccionar -- </mat-option>
+          <mat-option *ngFor="let cargo of cargoRequest" value="{{ cargo.id }}">
+            {{ cargo.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-sm"></div>
+    <div class="col-sm"></div>
+    <div class="col-sm"></div>
+    <div class="col-sm"></div>
+    <div class="col-sm">
+      <button mat-raised-button color="primary" (click)="openDialog()">Crear nuevo usuario</button>
+    </div>
+
+    <mat-divider></mat-divider>
+  </div>
+
+</div>
+
+<div class="container-fluid bg-secondary-subtle text-emphasis-secondary mat-elevation-z8">
+  <mat-card>
+
+    <table [dataSource]="matTableDataSourceUser" mat-table class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="usuario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombres">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+        <td mat-cell *matCellDef="let element"> {{element.primerNombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="apellidos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+        <td mat-cell *matCellDef="let element"> {{element.primerApellido}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="departamentos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcionDepartamento}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cargo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcionCargo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="accion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="openEditUsers(element)">
+            <mat-icon>edit</mat-icon><label>Editar</label>
+          </button>
+          <button mat-icon-button color="warn" (click)="processToDestroyUsers(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5,10,15,20]" aria-label="Total registros:"></mat-paginator>
+
+  </mat-card>
+</div>
